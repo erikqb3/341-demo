@@ -32,15 +32,20 @@ app.use('/admin', adminRoutes);
 app.use(shopRoutes);
 
 app.use(errorController.get404);
+const port = process.env.PORT || 3000;
+
 
 mongoose
   .connect(
     // 'mongodb+srv://erikqb3:1KobeR.Shoryu_red@finalcse431shop.wlbdo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
-    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@finalcse431shop.wlbdo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
+    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@finalcse431shop.wlbdo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, { userNewUrlParser: true, useUnifiedTopology: true}
   )
   .then(result => {
-    app.listen(5000);
+    app.listen(port);
   })
   .catch(err => {
     console.log(err);
   });
+
+  // heroku config:set DB_USER=erikqb3
+  // heroku config:set DB_PASS=1KobeR.Shoryu_red
