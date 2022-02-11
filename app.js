@@ -3,7 +3,8 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-require('dotenv').config();
+const session = require('express-session');
+require('dotenv').config(); //heroku stuff
 
 const errorController = require('./controllers/error');
 const User = require('./models/user');
@@ -19,6 +20,13 @@ const authRoutes = require('./routes/auth');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(
+  session({
+    secret: 'my secret',
+    resave: false,
+    saveUninitialized: false
+  })
+);
 
 app.use((req, res, next) => {
   User.findById('6205e342d7e5eb275cf3ca35')
