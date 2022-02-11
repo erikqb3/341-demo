@@ -3,13 +3,20 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const session = require('express-session');
+const session = require('express-session'); // npm install --save -g express-session
+const MongoDbStore = require('connect-mongodb-session')(session); // npm install --save -g connect-mongodb-session
 require('dotenv').config(); //heroku stuff
 
 const errorController = require('./controllers/error');
 const User = require('./models/user');
 
+const MONGODB_URI = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@finalcse431shop.wlbdo.mongodb.net/shop`; //`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@finalcse431shop.wlbdo.mongodb.net/shop?&w=majority`
+
 const app = express();
+const store = new MongoDbStore({
+  uri: MONGODB_URI,
+  collection: 'sessions'
+})
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -24,7 +31,8 @@ app.use(
   session({
     secret: 'my secret',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: store
   })
 );
 
@@ -48,7 +56,7 @@ const port = process.env.PORT || 3000;
 mongoose
   .connect(
     // 'mongodb+srv://erikqb3:1KobeR.Shoryu_red@finalcse431shop.wlbdo.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
-    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@finalcse431shop.wlbdo.mongodb.net/shop?retryWrites=true&w=majority`, { userNewUrlParser: true, useUnifiedTopology: true}
+    MONGODB_URI, { userNewUrlParser: true, useUnifiedTopology: true}
   )
   .then(result => {
     User.findOne().then(user => {
