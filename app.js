@@ -13,8 +13,9 @@ const app = express();
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
-const adminRoutes = require('./routes/admin');
-const shopRoutes = require('./routes/shop');
+const adminRoutes = require('./routes/admin'); //this is where you connect view routes or something
+const shopRoutes = require('./routes/shop'); //see app.use section, which applies this stuff
+const authRoutes = require('./routes/auth');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -30,6 +31,7 @@ app.use((req, res, next) => {
 
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
+app.use(authRoutes);
 
 app.use(errorController.get404);
 const port = process.env.PORT || 3000;
