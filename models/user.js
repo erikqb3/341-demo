@@ -56,7 +56,7 @@ userSchema.methods.removeFromCart = function(productId) {
   return this.save();
 }
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema); //mongoose makes names database in plural form
 
 
 

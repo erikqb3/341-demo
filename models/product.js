@@ -26,7 +26,7 @@ const productSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model('Product', productSchema);
+module.exports = mongoose.model('Product', productSchema); //mongoose makes names database in plural form
 
 // const mongodb = require('mongodb');
 // const getDb = require('../util/database').getDb;
