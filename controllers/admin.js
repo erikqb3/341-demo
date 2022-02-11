@@ -14,10 +14,11 @@ exports.postAddProduct = (req, res, next) => {
   const price = req.body.price;
   const description = req.body.description;
   const product = new Product({
-    title: title,
-    price: price,
+    title: title, //right = data received from contorller action (exports.postAddProduct)
+    price: price, //left = keys defined in schema (models/product.js)
     description: description,
-    imageUrl: imageUrl
+    imageUrl: imageUrl,
+    userId: req.user
   });
   product
     .save()
@@ -76,6 +77,8 @@ exports.postEditProduct = (req, res, next) => {
 
 exports.getProducts = (req, res, next) => {
   Product.find()
+    // .select('title price -_id') // how to remove stuff
+    // .populate('userId','name') // how to target/add stuff/ this will break code
     .then(products => {
       res.render('admin/products', {
         prods: products,
