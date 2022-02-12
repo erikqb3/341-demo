@@ -18,3 +18,10 @@ exports.postLogin = (req, res, next) => {
     // res.setHeader('Set-Cookie','loggedIn=true') //this is how you set a cookie, attributes could involve max-age, Expire=, secure, httpOnly -> can't be redirect with javascript
     .catch(err => console.log(err));
 };
+
+exports.postLogout = (req, res, next) => {
+  req.session.destroy(err => { //destroys session then runs funtion afterwards
+    console.log(err);
+    res.redirect('/');
+  });
+};
