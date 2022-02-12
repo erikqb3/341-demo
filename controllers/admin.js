@@ -5,21 +5,21 @@ exports.getAddProduct = (req, res, next) => {
     pageTitle: 'Add Product',
     path: '/admin/add-product',
     editing: false,
-    isAuthenticated: req.session.isLoggedIn
+    isAuthenticated: req.isLoggedIn
   });
 };
 
 exports.postAddProduct = (req, res, next) => {
   const title = req.body.title;
   const imageUrl = req.body.imageUrl;
-  const price = req.body.price;
+  const price = req.body.price; 
   const description = req.body.description;
   const product = new Product({
     title: title, //right = data received from contorller action (exports.postAddProduct)
     price: price, //left = keys defined in schema (models/product.js)
     description: description,
     imageUrl: imageUrl,
-    userId: req.session.user
+    userId: req.user
   });
   product
     .save()
@@ -49,7 +49,7 @@ exports.getEditProduct = (req, res, next) => {
         path: '/admin/edit-product',
         editing: editMode,
         product: product,
-        isAuthenticated: req.session.isLoggedIn
+        isAuthenticated: req.isLoggedIn
       });
     })
     .catch(err => console.log(err));
@@ -86,7 +86,7 @@ exports.getProducts = (req, res, next) => {
         prods: products,
         pageTitle: 'Admin Products',
         path: '/admin/products',
-        isAuthenticated: req.session.isLoggedIn
+        isAuthenticated: req.isLoggedIn
       });
     })
     .catch(err => console.log(err));
