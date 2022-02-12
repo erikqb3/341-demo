@@ -1,15 +1,23 @@
 const User = require('../models/user');
 
 exports.getLogin = (req, res, next) => {
-  res.render('auth/login', { //comes in true, goes out false
+  res.render('auth/login', {
     path: '/login',
     pageTitle: 'Login',
     isAuthenticated: false
   });
 };
 
+exports.getSignup = (req, res, next) => {
+  res.render('auth/signup', {
+    path: '/signup',
+    pageTitle: 'Signup',
+    isAuthenticated: false
+  });
+};
+
 exports.postLogin = (req, res, next) => {
-  User.findById('6205e342d7e5eb275cf3ca35')
+  User.findById('5bab316ce0a7c75f783cb8a8')
     .then(user => {
       req.session.isLoggedIn = true;
       req.session.user = user;
@@ -18,12 +26,13 @@ exports.postLogin = (req, res, next) => {
         res.redirect('/');
       });
     })
-    // res.setHeader('Set-Cookie','loggedIn=true') //this is how you set a cookie, attributes could involve max-age, Expire=, secure, httpOnly -> can't be redirect with javascript
     .catch(err => console.log(err));
 };
 
+exports.postSignup = (req, res, next) => {};
+
 exports.postLogout = (req, res, next) => {
-  req.session.destroy(err => { //destroys session then runs funtion afterwards
+  req.session.destroy(err => {
     console.log(err);
     res.redirect('/');
   });
