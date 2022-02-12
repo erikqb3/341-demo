@@ -1,3 +1,5 @@
+const bcrypt = require('bcryptjs'); //npm install --save -g bcryptjs
+
 const User = require('../models/user');
 
 exports.getLogin = (req, res, next) => {
@@ -38,9 +40,13 @@ exports.postSignup = (req, res, next) => {
       if (userDoc) {
         return res.redirect('/signup)');
       }
+      return bcrypt.hash(password, 12); //12 -> salt value, how much hashing is done, 12 is standard highest
+
+    })
+    .then(hashedPassword => {
       const user = new User({
         email: email,
-        password: password,
+        password: hashedPassword,
         cart: { items: [] }
       });
       return user.save();
