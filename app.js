@@ -3,9 +3,10 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const session = require('express-session'); // npm install --save -g express-session
-const MongoDBStore = require('connect-mongodb-session')(session); // npm install --save -g connect-mongodb-session
-const csrf = require('csurf'); //npm install --save -g csurf
+const session = require('express-session'); // npm install --save express-session
+const MongoDBStore = require('connect-mongodb-session')(session); // npm install --save connect-mongodb-session
+const csrf = require('csurf'); //npm install --save csurf
+const flash = require('connect-flash') //npm install --save connect-flash
 require('dotenv').config(); //heroku stuff
 
 const errorController = require('./controllers/error');
@@ -38,6 +39,7 @@ app.use(
   })
 );
 app.use(csrfProtection);
+app.use(flash());
 
 app.use((req, res, next) => {
   if (!req.session.user) {
