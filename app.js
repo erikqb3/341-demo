@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const session = require('express-session'); // npm install --save -g express-session
 const MongoDBStore = require('connect-mongodb-session')(session); // npm install --save -g connect-mongodb-session
+const csrf = require('csurf'); //npm install --save -g csurf
 require('dotenv').config(); //heroku stuff
 
 const errorController = require('./controllers/error');
@@ -17,6 +18,7 @@ const store = new MongoDBStore({
   uri: MONGODB_URI,
   collection: 'sessions'
 })
+const csrfProtection = csrf();
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -35,6 +37,7 @@ app.use(
     store: store
   })
 );
+app.use(csrfProtection);
 
 app.use((req, res, next) => {
   if (!req.session.user) {
