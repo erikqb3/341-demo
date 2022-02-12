@@ -63,18 +63,6 @@ mongoose
     MONGODB_URI, { userNewUrlParser: true, useUnifiedTopology: true}
   )
   .then(result => {
-    User.findOne().then(user => {
-      if (!user) {
-        const user = new User ({
-          name: "Erik",
-          email: "scrapmail4erik@gmail.com",
-          cart: {
-            items: []
-          }
-        });
-        user.save();
-      }
-    });
     app.listen(port);
   })
   .catch(err => {
