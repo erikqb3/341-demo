@@ -1,9 +1,9 @@
 const Product = require('../models/product');
 
 exports.getAddProduct = (req, res, next) => {
-  if (!req.session.isLoggedIn) {
-    return res.redirect('/login');
-  }
+  // if (!req.session.isLoggedIn) { //might not need this because of isAuth middleware
+  //   return res.redirect('/login');
+  // }
   res.render('admin/edit-product', {
     pageTitle: 'Add Product',
     path: '/admin/add-product',
