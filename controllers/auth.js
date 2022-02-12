@@ -13,7 +13,10 @@ exports.postLogin = (req, res, next) => {
     .then(user => {
       req.session.isLoggedIn = true;
       req.session.user = user;
-      res.redirect('/');
+      req.session.save(err => {
+        console.log(err);
+        res.redirect('/');
+      });
     })
     // res.setHeader('Set-Cookie','loggedIn=true') //this is how you set a cookie, attributes could involve max-age, Expire=, secure, httpOnly -> can't be redirect with javascript
     .catch(err => console.log(err));
