@@ -202,11 +202,26 @@ form {
   cursor: pointer;
 }
 
-.btn:hover,
-.btn:active {
+.btn.danger:hover,
+.btn.danger:active {
   background-color: red;
   border: none;
   color: white;
+}
+
+.user-message {
+  margin: auto;
+  width: 90%;
+  padding: 0.5rem;
+  border-radius: 3px;
+  text-align: center;
+  border: 1px solid indigo;
+  background-color: rgba(50, 0, 100, 0.5);
+}
+
+.user-message--error {
+  border-color: red;
+  color: red;
 }
 
 @media (min-width: 768px) {
@@ -216,5 +231,9 @@ form {
 
   #side-menu-toggle {
     display: none;
+  }
+
+  .user-message {
+    width: 30rem;
   }
 }
