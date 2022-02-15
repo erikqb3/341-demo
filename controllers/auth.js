@@ -83,7 +83,7 @@ exports.postSignup = (req, res, next) => {
       .render('auth/signup', {
         path: '/signup',
         pageTitle: 'Signup',
-        errorMessage: errors.array()[0]
+        errorMessage: errors.array()[0].msg
       });
     }
   User.findOne({email: email}) //left-> database email, right->input email

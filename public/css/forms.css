@@ -1,5 +1,10 @@
+form.login-form {
+  padding: 1rem;
+}
+
 .form-control {
   margin: 1rem 0;
+  /* padding: 1rem; */
 }
 
 .form-control label,
@@ -20,4 +25,9 @@
 .form-control input:focus,
 .form-control textarea:focus {
   outline-color: #00695c;
+}
+
+button.btn {
+  display: block;
+  margin: 1rem auto;
 }
