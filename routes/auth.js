@@ -12,14 +12,21 @@ router.get('/login', authController.getLogin);
 
 router.get('/signup', authController.getSignup);
 
-router.post('/login', authController.postLogin);
+router.post('/login', [
+body('email')
+  .isEmail()
+  .withMessage('😒 Please enter a valid email 😒'),
+body('password',"Please enter a password with only numbers and text and at least 5 characters")
+  .isLength({ min: 5 })
+  // .isAlphanumeric() //no special char, only letters and numbers
+],
+authController.postLogin);
 
-router.post(
-  '/signup', 
-  [  
+router.post('/signup', [
+      
     check('email')
     .isEmail()
-    .withMessage('Please enter a valid email')
+    .withMessage('😒 Please enter a valid email 😒')
     .custom((value, { req }) => {
       // if (value === "fake@email.com") {
       //   throw new Error('☠ This email address if forbidden. ☠');
@@ -34,8 +41,8 @@ router.post(
   }),
     body('password',
     "Please enter a password with only numbers and text and at least 5 characters")
-    .isLength({min: 5})
-    .isAlphanumeric(),
+    .isLength({min: 5}),
+    // .isAlphanumeric(), //only letters and numbers, not special char
     body('confirmPassword')
     .custom((value, { req }) => {
       if (value !== req.body.password) {
@@ -44,8 +51,7 @@ router.post(
       return true;
     })
   ],
-  authController.postSignup
-  );
+  authController.postSignup);
 
 router.post('/logout', authController.postLogout);
 
