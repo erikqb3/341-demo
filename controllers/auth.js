@@ -62,7 +62,11 @@ exports.postLogin = (req, res, next) => {
       errorMessage: errors.array()[0].msg,
       oldInput: {
         email: email,
-        password: password
+        password: password,
+        oldInput: {
+          email: email,
+          password: password,
+        }
       }
     });
   }
