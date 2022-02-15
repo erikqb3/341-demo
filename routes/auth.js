@@ -1,6 +1,6 @@
 const express = require('express');
 
-const  { check } = require('express-validator') //npm install --save express-validator
+const  { check,body } = require('express-validator') //npm install --save express-validator
 
 const authController = require('../controllers/auth');
 
@@ -14,7 +14,7 @@ router.post('/login', authController.postLogin);
 
 router.post(
   '/signup', 
-  check('email')
+  [  check('email')
     .isEmail()
     .withMessage('Please enter a valid email')
     .custom((value, { req }) => {
@@ -23,6 +23,11 @@ router.post(
       }
       return true;
     }), 
+    body('password',
+    "Please enter a password with only numbers and text and at least 5 characters")
+    .isLength({min: 5})
+    .isAlphanumeric()
+  ],
   authController.postSignup
   );
 

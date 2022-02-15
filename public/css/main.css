@@ -65,11 +65,13 @@ form {
 
 .main-header__item a:hover,
 .main-header__item a:active,
-.main-header__item a.active,
 .main-header__item button:hover,
-.main-header__item button:active,
-.main-header__item button.active {
+.main-header__item button:active {
   color: red;
+}
+.main-header__item a.active,
+.main-header__item button.active {
+  color: #00695c;
 }
 
 .mobile-nav {
@@ -210,7 +212,7 @@ form {
 }
 
 .user-message {
-  margin: auto;
+  margin: 1rem auto;
   width: 90%;
   padding: 1rem;
   border-radius: 3px;
