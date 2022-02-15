@@ -31,3 +31,7 @@ button.btn {
   display: block;
   margin: 1rem auto;
 }
+
+.form-control input.invalid {
+  border-color: red;
+}

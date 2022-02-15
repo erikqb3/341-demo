@@ -15,6 +15,7 @@ const transporter = nodemailer.createTransport(sendgridTransport({
 
 exports.getLogin = (req, res, next) => {
   let message = req.flash('error');
+  const errors = validationResult(req);
   if (message.length > 0) {
     message = message[0];
   } else {
@@ -27,12 +28,14 @@ exports.getLogin = (req, res, next) => {
     oldInput: {
       email: '',
       password: '',
-    }
+    },
+    validationErrors: errors.array()
   });
 };
 
 exports.getSignup = (req, res, next) => {
   let message = req.flash('error');
+  const errors = validationResult(req);
   if (message.length > 0) {
     message = message[0];
   } else {
@@ -46,7 +49,8 @@ exports.getSignup = (req, res, next) => {
       email: '',
       password: '',
       confimrPassword: ''
-    }
+    },
+    validationErrors: errors.array()
   });
 };
 
@@ -56,17 +60,14 @@ exports.postLogin = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422)
-    .render('auth/signup', {
-      path: '/signup',
-      pageTitle: 'Signup',
+    .render('auth/login', {
+      path: '/login',
+      pageTitle: 'Login',
       errorMessage: errors.array()[0].msg,
       oldInput: {
         email: email,
         password: password,
-        oldInput: {
-          email: email,
-          password: password,
-        }
+        validationErrors: errors.array()
       }
     });
   }
@@ -114,7 +115,8 @@ exports.postSignup = (req, res, next) => {
           email: email,
           password: password,
           confirmPassword: req.body.confirmPassword
-        }
+        },
+        validationErrors: errors.array()
       });
     }
      bcrypt.hash(password, 12) //12 -> salt value, how much hashing is done, 12 is standard highest
