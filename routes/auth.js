@@ -4,6 +4,8 @@ const  { check,body } = require('express-validator') //npm install --save expres
 
 const authController = require('../controllers/auth');
 
+const User = require('../models/user');
+
 const router = express.Router();
 
 router.get('/login', authController.getLogin);
@@ -14,15 +16,22 @@ router.post('/login', authController.postLogin);
 
 router.post(
   '/signup', 
-  [  check('email')
+  [  
+    check('email')
     .isEmail()
     .withMessage('Please enter a valid email')
     .custom((value, { req }) => {
-      if (value === "fake@email.com") {
-        throw new Error('☠ This email address if forbidden. ☠');
-      }
-      return true;
-    }), 
+      // if (value === "fake@email.com") {
+      //   throw new Error('☠ This email address if forbidden. ☠');
+      // }
+      // return true;
+      return User.findOne({email: value}) //left-> database email, right->input email
+      .then(userDoc => {
+        if (userDoc) {
+          return Promise.reject('😝 Email exists already, please pick a different one. 😝');
+        }
+    });
+  }),
     body('password',
     "Please enter a password with only numbers and text and at least 5 characters")
     .isLength({min: 5})
@@ -30,7 +39,7 @@ router.post(
     body('confirmPassword')
     .custom((value, { req }) => {
       if (value !== req.body.password) {
-        throw new Error('😘 Passwords hav to match! 😘');
+        throw new Error('😘 Passwords have to match! 😘');
       }
       return true;
     })

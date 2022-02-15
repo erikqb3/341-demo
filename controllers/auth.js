@@ -75,7 +75,6 @@ exports.postLogin = (req, res, next) => {
 exports.postSignup = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
-  const confirmPassword = req.body.confirmPassword;
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     console.log(errors.array());
@@ -86,13 +85,7 @@ exports.postSignup = (req, res, next) => {
         errorMessage: errors.array()[0].msg
       });
     }
-  User.findOne({email: email}) //left-> database email, right->input email
-    .then(userDoc => {
-      if (userDoc) {
-        req.flash('error', '😝 Email exists already, please pick a different one. 😝')
-        return res.redirect('/signup');
-      }
-      return bcrypt.hash(password, 12) //12 -> salt value, how much hashing is done, 12 is standard highest
+     bcrypt.hash(password, 12) //12 -> salt value, how much hashing is done, 12 is standard highest
         .then(hashedPassword => {
           const user = new User({
             email: email,
@@ -108,14 +101,10 @@ exports.postSignup = (req, res, next) => {
             from: "shop@node-complete.com",
             subject: "Signup Complete",
             html: '<h1>You successfully signed up! ✌😀✌ </h1>'
-          });
-        })
+          })
         .catch(err => {
           console.log(err);
         });
-    })
-    .catch(err => {
-      console.log(err);
     })
 };
 
