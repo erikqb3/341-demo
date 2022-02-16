@@ -55,7 +55,7 @@ app.use((req, res, next) => {
   })
   // res.setHeader('Set-Cookie','loggedIn=true') //this is how you set a cookie, attributes could involve max-age, Expire=, secure, httpOnly -> can't be redirect with javascript
   .catch(err => {
-    throw new Error(err)});
+    next(new Error(err))});
 })
 
 app.use((req, res, next) => {
