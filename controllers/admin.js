@@ -42,7 +42,7 @@ exports.postAddProduct = (req, res, next) => {
     });
   }
   const product = new Product({
-    _id: new mongoose.Types.ObjectId('6205f137f3758e05149fb5bb'),
+    // _id: new mongoose.Types.ObjectId('6205f137f3758e05149fb5bb'), 
     title: title, //right = data received from contorller action (exports.postAddProduct)
     price: price, //left = keys defined in schema (models/product.js)
     description: description,
@@ -57,7 +57,11 @@ exports.postAddProduct = (req, res, next) => {
       res.redirect('/admin/products');
     })
     .catch(err => {
-      res.redirect('/500');
+      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+      // useErrorMiddleware() //not sure how to do easy functions like I used to be able to
     });
 };
 
@@ -82,7 +86,13 @@ exports.getEditProduct = (req, res, next) => {
         validationErrors: []
       });
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+      // useErrorMiddleware() //not sure how to do easy functions like I used to be able to
+    });
 };
 
 exports.postEditProduct = (req, res, next) => {
@@ -127,7 +137,13 @@ exports.postEditProduct = (req, res, next) => {
         res.redirect('/admin/products');
       });
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+      // useErrorMiddleware() //not sure how to do easy functions like I used to be able to
+    });
 };
 
 exports.getProducts = (req, res, next) => {
@@ -141,7 +157,13 @@ exports.getProducts = (req, res, next) => {
         path: '/admin/products',
       });
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+      // useErrorMiddleware() //not sure how to do easy functions like I used to be able to
+    });
 };
 
 exports.postDeleteProduct = (req, res, next) => {
@@ -151,5 +173,20 @@ exports.postDeleteProduct = (req, res, next) => {
       console.log('DESTROYED PRODUCT');
       res.redirect('/admin/products');
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+      // useErrorMiddleware() //not sure how to do easy functions like I used to be able to
+    });
 };
+
+
+// .catch(err => {
+//   console.log(err);
+//   const error = new Error(err);
+//   error.httpStatusCode = 500;
+//   return next(error);
+//   // useErrorMiddleware() //not sure how to do easy functions like I used to be able to
+// });

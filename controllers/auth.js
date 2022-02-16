@@ -114,7 +114,13 @@ exports.postLogin = (req, res, next) => {
           console.log(err);
           res.redirect('/login');
         })
-      .catch(err => console.log(err));
+        .catch(err => {
+          console.log(err);
+          const error = new Error(err);
+          error.httpStatusCode = 500;
+          return next(error);
+          // useErrorMiddleware() //not sure how to do easy functions like I used to be able to
+        });
     });
 }
 
@@ -154,9 +160,13 @@ exports.postSignup = (req, res, next) => {
             subject: "Signup Complete",
             html: '<h1>You successfully signed up! ✌😀✌ </h1>'
           })
-        .catch(err => {
-          console.log(err);
-        });
+          .catch(err => {
+            console.log(err);
+            const error = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
+            // useErrorMiddleware() //not sure how to do easy functions like I used to be able to
+          });
     })
 };
 
@@ -211,7 +221,11 @@ exports.postReset = (req, res, next) => {
     })
     .catch(err => {
       console.log(err);
-    })
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+      // useErrorMiddleware() //not sure how to do easy functions like I used to be able to
+    });
   });
 };
 
@@ -237,6 +251,10 @@ exports.getNewPassword = (req, res, next) => {
     })
     .catch(err => {
       console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+      // useErrorMiddleware() //not sure how to do easy functions like I used to be able to
     });
 };
 
@@ -266,5 +284,9 @@ exports.postNewPassword = (req, res, next) => {
     })
     .catch(err => {
       console.log(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+      // useErrorMiddleware() //not sure how to do easy functions like I used to be able to
     });
 };
