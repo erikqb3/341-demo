@@ -206,6 +206,11 @@ form {
   cursor: pointer;
 }
 
+.btn:hover,
+.btn:active {
+  background-color: red;
+}
+
 .btn.danger:hover,
 .btn.danger:active {
   background-color: red;
@@ -230,6 +235,16 @@ form {
 
 div.image > img {
   width: 25vw;
+}
+
+div.centered > a {
+  color: orange;
+  text-decoration: none;
+}
+
+div.centered > a:hover,
+div.centered > a:active {
+  color: red;
 }
 
 @media (min-width: 768px) {

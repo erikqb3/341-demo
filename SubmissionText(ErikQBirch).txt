@@ -3,7 +3,6 @@ Please answer the questions in this text file and submit it to I-Learn.
 
 1. Copy and paste the URL for your web application (e.g., Heroku):
 (https://shopheroku5891.herokuapp.com/)
-(still doesn't work yet)
 
 
 2. Copy and paste the URL for your source code repository (e.g., GitHub):
@@ -16,11 +15,11 @@ Please answer the questions in this text file and submit it to I-Learn.
   Cookies and Sessions works
   All tabs work!!!
   Edit, Delete, Add to Cart work!
-  Lots of stuff works  
+  Almost everythingworks  
   CSS looks great)
 
 4. Briefly describe any pieces of the assignment that are not yet working correctly.
-(* unable to connect to Heroku)
+(* resetting password through email)
 
 5. Briefly describe the "coolest" thing you learned while completing this assignment.
 (* I am happy that I understood the reason behind some of my coding problems.)
@@ -37,3 +36,11 @@ Please answer the questions in this text file and submit it to I-Learn.
 (5)
 8. Provide a brief justification (1-2 sentences) for selecting that category.
 (I've done the best I can and I've made it my own!)
+
+
+heroku -v
+heroku create -a 'shopheroku5891'
+heroku git: remote -a [heroku name] //shopheroku5891
+git status
+git push heroku master
+heroku logs --tail
