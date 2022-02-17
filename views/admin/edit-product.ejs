@@ -51,7 +51,6 @@
             </div>
             <% if (editing) { %>
                 <input type="hidden" value="<%= product._id %>" name="productId">
-                <!-- <input type="hidden" value="<%= admin._id %>" name="userId"> -->
             <% } %>
 
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">

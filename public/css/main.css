@@ -9,7 +9,12 @@ body {
   margin: 0;
   color: whitesmoke;
   font-family: 'Open Sans', sans-serif;
-  background-color: #3a3a3a;
+  /* background-color: #3a3a3a; */
+  background-image: url('https://cdn.glitch.com/b76629d6-7d20-4296-9a57-a0101d139dd6%2Fac82648f-0736-431a-9f18-81ac2fcea9f9.image.png?v=1624646975079');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 main {
@@ -61,17 +66,18 @@ form {
   font-weight: bold;
   background-color: orange;
   border: none;
+  font-size: 1rem;
 }
 
 .main-header__item a:hover,
 .main-header__item a:active,
 .main-header__item button:hover,
 .main-header__item button:active {
-  color: red;
+  color: #d55645;
 }
 .main-header__item a.active,
 .main-header__item button.active {
-  color: #00695c;
+  color: #8d382d;
 }
 
 .mobile-nav {
@@ -115,7 +121,7 @@ form {
 .mobile-nav__item a:active,
 .mobile-nav__item a:hover,
 .mobile-nav__item a.active {
-  background: red;
+  background-color: #8d382d;
   color: white;
   border-radius: 3px;
 }
@@ -137,7 +143,7 @@ form {
 #side-menu-toggle:active,
 #side-menu-toggle:hover {
   color: whitesmoke;
-  background-color: red;
+  background-color: #d55645;
 }
 
 .backdrop {
@@ -180,6 +186,7 @@ form {
 
 .card__image img {
   width: 100%;
+  border: 5px solid #67b6b3;
 }
 
 .card__actions {
@@ -206,7 +213,7 @@ form {
 
 .btn.danger:hover,
 .btn.danger:active {
-  background-color: red;
+  background-color: #d55645;
   border: none;
   color: white;
 }
@@ -222,8 +229,8 @@ form {
 }
 
 .user-message--error {
-  border-color: red;
-  color: red;
+  border-color: #d55645;
+  color: #d55645;
 }
 
 @media (min-width: 768px) {

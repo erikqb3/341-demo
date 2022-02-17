@@ -24,7 +24,7 @@ form.login-form {
 
 .form-control input:focus,
 .form-control textarea:focus {
-  outline-color: #00695c;
+  outline-color: #8d382d;
 }
 
 button.btn {
@@ -34,5 +34,5 @@ button.btn {
 
 .form-control input.invalid,
 .form-control textarea.invalid {
-  border-color: red;
+  border-color: #d55645;
 }
