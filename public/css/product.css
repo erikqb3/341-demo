@@ -31,3 +31,7 @@
 .product__description {
   text-align: center;
 }
+
+div.image > img {
+  width: 50vw;
+}

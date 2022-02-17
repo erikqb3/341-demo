@@ -61,6 +61,7 @@ form {
   font-weight: bold;
   background-color: orange;
   border: none;
+  font-size: 1rem;
 }
 
 .main-header__item a:hover,
@@ -180,6 +181,7 @@ form {
 
 .card__image img {
   width: 100%;
+  border: 5px solid #00695c;
 }
 
 .card__actions {
@@ -224,6 +226,10 @@ form {
 .user-message--error {
   border-color: red;
   color: red;
+}
+
+div.image > img {
+  width: 25vw;
 }
 
 @media (min-width: 768px) {
