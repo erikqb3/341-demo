@@ -4,6 +4,7 @@
     <body>
         <%- include('../includes/navigation.ejs') %>
         <main class="centered">
+            <div id="product-detail-card">
             <h1><%= product.title %></h1>
             <hr>
             <div class="image">
@@ -14,5 +15,6 @@
             <% if (isAuthenticated) { %>
                 <%- include('../includes/add-to-cart.ejs', {product: product}) %>
             <% } %>
+            </div>
         </main>
         <%- include('../includes/end.ejs') %>

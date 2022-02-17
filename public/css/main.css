@@ -30,6 +30,16 @@ form {
   text-align: center;
 }
 
+div#product-detail-card > p,
+div#product-detail-card > h1,
+div#product-detail-card > h2 {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: whitesmoke;
+  margin: 0 auto;
+  padding: 1rem 0;
+  width: 26.5%;
+}
+
 .main-header {
   width: 100%;
   height: 3.5rem;
