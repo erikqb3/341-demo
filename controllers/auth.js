@@ -94,7 +94,7 @@ exports.postLogin = (req, res, next) => {
             req.session.isLoggedIn = true;
             req.session.user = user;
             return req.session.save(err => {
-              console.log(err, "ERR! ERR!");
+              console.log(err, "ERR! ERR! auth.js/97");
               res.redirect('/');
             });
           };
@@ -111,11 +111,11 @@ exports.postLogin = (req, res, next) => {
             });
         })
         .catch(err => {
-          console.log(err, "ERR! ERR!");
+          console.log(err, "ERR! ERR! auth.js/114");
           res.redirect('/login');
         })
         .catch(err => {
-          console.log(err, "ERR! ERR!");
+          console.log(err, "ERR! ERR! auth.js/118");
           const error = new Error(err);
           error.httpStatusCode = 500;
           return next(error);
@@ -161,7 +161,7 @@ exports.postSignup = (req, res, next) => {
             html: '<h1>You successfully signed up! ✌😀✌ </h1>'
           })
           .catch(err => {
-            console.log(err, "ERR! ERR!");
+            console.log(err, "ERR! ERR! auth.js/ 164");
             const error = new Error(err);
             error.httpStatusCode = 500;
             return next(error);
@@ -172,7 +172,7 @@ exports.postSignup = (req, res, next) => {
 
 exports.postLogout = (req, res, next) => {
   req.session.destroy(err => {
-    console.log(err, "ERR! ERR!");
+    console.log(err, "ERR! ERR! auth.js/ 175");
     res.redirect('/');
   });
 };
@@ -194,7 +194,7 @@ exports.getReset = (req, res, next) => {
 exports.postReset = (req, res, next) => {
   crypto.randomBytes(32, (err, buffer) => {
     if (err) {
-      console.log(err, "ERR! ERR!");
+      console.log(err, "ERR! ERR! auth.js/197");
       return res.redirect('/reset');
     }
     const token = buffer.toString('hex');
@@ -220,7 +220,7 @@ exports.postReset = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err, "ERR! ERR!");
+      console.log(err, "ERR! ERR! auth.js/223");
       const error = new Error(err);
       error.httpStatusCode = 500;
       return next(error);
@@ -283,7 +283,7 @@ exports.postNewPassword = (req, res, next) => {
       res.redirect('/login');
     })
     .catch(err => {
-      console.log(err, "ERR! ERR!");
+      console.log(err, "ERR! ERR! auth.js/286");
       const error = new Error(err);
       error.httpStatusCode = 500;
       return next(error);

@@ -57,7 +57,7 @@ exports.postAddProduct = (req, res, next) => {
       res.redirect('/admin/products');
     })
     .catch(err => {
-      console.log(err, "ERR! ERR!");
+      console.log(err, "ERR! ERR!, admin.js/60");
       const error = new Error(err);
       error.httpStatusCode = 500;
       return next(error);
@@ -87,7 +87,7 @@ exports.getEditProduct = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err, "ERR! ERR!");
+      console.log(err, "ERR! ERR! admin.js/90");
       const error = new Error(err);
       error.httpStatusCode = 500;
       return next(error);
@@ -138,7 +138,7 @@ exports.postEditProduct = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err, "ERR! ERR!");
+      console.log(err, "ERR! ERR! admin.js/141");
       const error = new Error(err);
       error.httpStatusCode = 500;
       return next(error);
@@ -158,7 +158,7 @@ exports.getProducts = (req, res, next) => {
       });
     })
     .catch(err => {
-      console.log(err, "ERR! ERR!");
+      console.log(err, "ERR! ERR! admin.js/161");
       const error = new Error(err);
       error.httpStatusCode = 500;
       return next(error);
@@ -174,7 +174,7 @@ exports.postDeleteProduct = (req, res, next) => {
       res.redirect('/admin/products');
     })
     .catch(err => {
-      console.log(err, "ERR! ERR!");
+      console.log(err, " admin.js/177");
       const error = new Error(err);
       error.httpStatusCode = 500;
       return next(error);
