@@ -4,7 +4,7 @@ const Order = require('../models/order');
 exports.getProducts = (req, res, next) => {
   Product.find()
     .then(products => {
-      console.log(products);
+      console.log(products, "PRODUCTS, shop.js/controllers/7");
       res.render('shop/product-list', {
         prods: products,
         pageTitle: 'All Products',
@@ -63,6 +63,7 @@ exports.getCart = (req, res, next) => {
     .execPopulate()
     .then(user => {
       const products = user.cart.items;
+      console.log(products, "PRODUCTS, product/controller, 66")
       res.render('shop/cart', {
         path: '/cart',
         pageTitle: 'Your Cart',
@@ -87,6 +88,11 @@ exports.postCart = (req, res, next) => {
     .then(result => {
       console.log(result);
       res.redirect('/cart');
+    })
+    .catch(err => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 
